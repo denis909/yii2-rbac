@@ -23,4 +23,9 @@ class UserRbacBehavior extends \yii\base\Behavior
         return ArrayHelper::map($query->all(), 'name', 'name');
     }
 
+    public function getRolesAsString()
+    {
+        return implode(', ', array_values($this->rolesList));
+    }
+
 }
