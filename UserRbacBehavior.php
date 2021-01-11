@@ -2,17 +2,19 @@
 
 namespace denis909\yii;
 
+use yii\helpers\ArrayHelper;
+
 class UserRbacBehavior extends \yii\base\Behavior
 {
 
     public function getRoles()
     {
-        return $this->hasMany(AuthItem::class, ['name' => 'item_name'])->viaTable(AuthAssignment::tableName(), ['user_id' => 'id']);
+        return $this->owner->hasMany(AuthItem::class, ['name' => 'item_name'])->viaTable(AuthAssignment::tableName(), ['user_id' => 'id']);
     }
 
     public function getRolesList()
     {
-        $query = new AuthItem::find();
+        $query = AuthItem::find();
 
         $query->typeRole();
 
